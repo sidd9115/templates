@@ -1,0 +1,582 @@
+=================================================
+        Session 6 - Python Database
+=================================================
+
+TOPICS COVERED
+==============
+
+1. Database Connection
+2. Creating Database Table
+3. Insert Operation
+4. Read Operation
+5. Update Operation
+6. Delete Operation
+7. Performing Transactions
+8. Commit Operation
+9. Rollback Operation
+10. Disconnecting Database
+11. Handling Error
+
+=================================================
+INTRODUCTION TO DATABASE
+=================================================
+
+A Database is a collection of organized data
+that can be stored, managed and retrieved.
+
+Python supports databases like:
+
+1. SQLite
+2. MySQL
+3. Oracle
+4. PostgreSQL
+
+
+SQLite is a built-in database in Python.
+
+Module used:
+
+import sqlite3
+
+
+=================================================
+1. DATABASE CONNECTION
+=================================================
+
+Connection is used to connect Python program
+with a database.
+
+
+Syntax:
+
+sqlite3.connect("database_name")
+
+
+Example:
+
+import sqlite3
+
+
+conn = sqlite3.connect("student.db")
+
+
+print("Database Connected")
+
+
+Output:
+
+Database Connected
+
+
+=================================================
+2. CREATING DATABASE TABLE
+=================================================
+
+A table stores data in rows and columns.
+
+
+Example:
+
+
+import sqlite3
+
+
+conn = sqlite3.connect("student.db")
+
+cursor = conn.cursor()
+
+
+cursor.execute('''
+
+CREATE TABLE Student(
+
+id INTEGER PRIMARY KEY,
+
+name TEXT,
+
+age INTEGER
+
+)
+
+''')
+
+
+print("Table Created")
+
+
+Output:
+
+Table Created
+
+
+=================================================
+3. INSERT OPERATION
+=================================================
+
+Insert operation is used to add new records
+into a table.
+
+
+Example:
+
+
+cursor.execute(
+
+"INSERT INTO Student VALUES(1,'Rahul',20)"
+
+)
+
+
+conn.commit()
+
+
+print("Record Inserted")
+
+
+Output:
+
+Record Inserted
+
+
+-------------------------------------------------
+
+Insert Multiple Records:
+
+
+cursor.execute(
+"INSERT INTO Student VALUES(2,'Amit',21)"
+)
+
+
+cursor.execute(
+"INSERT INTO Student VALUES(3,'Rohan',22)"
+)
+
+
+conn.commit()
+
+
+=================================================
+4. READ OPERATION
+=================================================
+
+Read operation is used to retrieve records
+from database.
+
+
+Example:
+
+
+cursor.execute(
+"SELECT * FROM Student"
+)
+
+
+data = cursor.fetchall()
+
+
+for row in data:
+
+    print(row)
+
+
+Output:
+
+
+(1, 'Rahul', 20)
+
+(2, 'Amit', 21)
+
+(3, 'Rohan', 22)
+
+
+=================================================
+5. UPDATE OPERATION
+=================================================
+
+Update operation modifies existing data.
+
+
+Example:
+
+
+cursor.execute(
+
+"UPDATE Student SET age=25 WHERE id=1"
+
+)
+
+
+conn.commit()
+
+
+print("Record 
+Updated")
+
+
+Output:
+
+Record Updated
+
+
+=================================================
+6. DELETE OPERATION
+=================================================
+
+Delete operation removes records from table.
+
+
+Example:
+
+
+cursor.execute(
+
+"DELETE FROM Student WHERE id=2"
+
+)
+
+
+conn.commit()
+
+
+print("Record Deleted")
+
+
+Output:
+
+Record Deleted
+
+
+=================================================
+7. PERFORMING TRANSACTIONS
+=================================================
+
+A transaction is a group of database
+operations performed together.
+
+
+Transaction contains:
+
+1. Commit
+2. Rollback
+
+
+Example:
+
+
+try:
+
+    cursor.execute(
+    "INSERT INTO Student VALUES(4,'Raj',23)"
+    )
+
+    conn.commit()
+
+
+except:
+
+    conn.rollback()
+
+
+=================================================
+8. COMMIT OPERATION
+=================================================
+
+commit() permanently saves changes in the
+database.
+
+
+Syntax:
+
+
+connection.commit()
+
+
+Example:
+
+
+cursor.execute(
+
+"INSERT INTO Student VALUES(5,'John',24)"
+
+)
+
+
+conn.commit()
+
+
+print("Data Saved")
+
+
+Output:
+
+Data Saved
+
+
+=================================================
+9. ROLLBACK OPERATION
+=================================================
+
+rollback() cancels changes when an error
+occurs.
+
+
+Syntax:
+
+
+connection.rollback()
+
+
+Example:
+
+
+try:
+
+    cursor.execute(
+    "INSERT INTO Student VALUES(6,'Sam',25)"
+    )
+
+    conn.commit()
+
+
+except:
+
+    conn.rollback()
+
+    print("Transaction Failed")
+
+
+Output:
+
+Transaction Failed
+
+
+=================================================
+10. DISCONNECTING DATABASE
+=================================================
+
+close() method disconnects the database.
+
+
+Syntax:
+
+
+connection.close()
+
+
+Example:
+
+
+conn.close()
+
+
+print("Database Closed")
+
+
+Output:
+
+Database Closed
+
+
+=================================================
+11. HANDLING ERROR
+=================================================
+
+Errors can be handled using try-except block.
+
+
+Example:
+
+
+import sqlite3
+
+
+try:
+
+    conn = sqlite3.connect(
+    "student.db"
+    )
+
+    cursor = conn.cursor()
+
+    cursor.execute(
+    "SELECT * FROM Student"
+    )
+
+    print("Operation Successful")
+
+
+except Exception as e:
+
+    print("Error:",e)
+
+
+finally:
+
+    conn.close()
+
+
+
+Output:
+
+Operation Successful
+
+
+=================================================
+COMPLETE DATABASE PROGRAM
+=================================================
+
+
+import sqlite3
+
+
+try:
+
+
+    conn = sqlite3.connect(
+    "student.db"
+    )
+
+
+    cursor = conn.cursor()
+
+
+    cursor.execute('''
+
+    CREATE TABLE IF NOT EXISTS Student(
+
+    id INTEGER PRIMARY KEY,
+
+    name TEXT,
+
+    age INTEGER
+
+    )
+
+    ''')
+
+
+    cursor.execute(
+
+    "INSERT INTO Student VALUES(1,'Rahul',20)"
+
+    )
+
+
+    conn.commit()
+
+
+
+    cursor.execute(
+    "SELECT * FROM Student"
+    )
+
+
+    result = cursor.fetchall()
+
+
+    for row in result:
+
+        print(row)
+
+
+
+except Exception as e:
+
+
+    print("Error:",e)
+
+
+
+finally:
+
+
+    conn.close()
+
+
+
+Output:
+
+
+(1, 'Rahul', 20)
+
+
+=================================================
+IMPORTANT DIFFERENCES
+=================================================
+
+INSERT
+------
+
+Used to add new records.
+
+
+READ
+----
+
+Used to display records.
+
+
+UPDATE
+------
+
+Used to modify records.
+
+
+DELETE
+------
+
+Used to remove records.
+
+
+COMMIT
+------
+
+Saves changes permanently.
+
+
+ROLLBACK
+--------
+
+Cancels changes.
+
+
+=================================================
+VIVA QUESTIONS
+=================================================
+
+1. What is a database?
+
+2. What is SQLite?
+
+3. Which module is used for database in Python?
+
+4. What is a cursor?
+
+5. How do you create a database connection?
+
+6. What is the use of execute() method?
+
+7. What is INSERT operation?
+
+8. What is SELECT operation?
+
+9. What is UPDATE operation?
+
+10. What is DELETE operation?
+
+11. What is a transaction?
+
+12. Difference between commit and rollback?
+
+13. Why do we close database connection?
+
+14. How are database errors handled?
+
+15. What is fetchall() method?
+
+
+=================================================
+END OF SESSION 6
+(PYTHON DATABASE)
+=================================================

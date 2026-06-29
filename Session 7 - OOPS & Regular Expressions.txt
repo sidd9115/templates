@@ -1,0 +1,579 @@
+=================================================
+      Session 7 - OOPS & Regular Expressions
+=================================================
+
+11. OOPS OVERVIEW
+=================
+
+OOPS stands for Object Oriented Programming
+System.
+
+OOPS is a programming approach that organizes
+code using Classes and Objects.
+
+Advantages:
+-----------
+1. Code Reusability
+2. Easy Maintenance
+3. Data Security
+4. Modularity
+5. Flexibility
+
+Main Concepts:
+--------------
+1. Class
+2. Object
+3. Inheritance
+4. Polymorphism
+5. Encapsulation
+6. Data Hiding
+
+=================================================
+1. CREATING CLASS
+=================================================
+
+A Class is a blueprint for creating objects.
+
+Syntax:
+
+class ClassName:
+    statements
+
+Example:
+
+class Student:
+    pass
+
+print("Class Created")
+
+Output:
+
+Class Created
+
+-------------------------------------------------
+
+Example:
+
+class Student:
+
+    def display(self):
+        print("Welcome Student")
+
+=================================================
+2. CREATING OBJECT
+=================================================
+
+An Object is an instance of a class.
+
+Syntax:
+
+object_name = ClassName()
+
+Example:
+
+class Student:
+
+    def display(self):
+        print("Hello")
+
+s1 = Student()
+
+s1.display()
+
+Output:
+
+Hello
+
+=================================================
+3. ACCESSING ATTRIBUTES
+=================================================
+
+Attributes are variables inside a class.
+
+Example:
+
+class Student:
+
+    name = "Rahul"
+
+s1 = Student()
+
+print(s1.name)
+
+Output:
+
+Rahul
+
+-------------------------------------------------
+
+Using Constructor
+
+class Student:
+
+    def __init__(self,name):
+        self.name = name
+
+s1 = Student("Rahul")
+
+print(s1.name)
+
+Output:
+
+Rahul
+
+=================================================
+4. BUILT-IN CLASS ATTRIBUTES
+=================================================
+
+Python provides built-in attributes.
+
+Attribute          Description
+
+__dict__           Class Namespace
+__doc__            Class Documentation
+__name__           Class Name
+__module__         Module Name
+__bases__          Parent Classes
+
+Example:
+
+class Student:
+    "Student Information"
+
+print(Student.__name__)
+
+Output:
+
+Student
+
+-------------------------------------------------
+
+Example:
+
+print(Student.__doc__)
+
+Output:
+
+Student Information
+
+=================================================
+5. DESTROYING OBJECTS
+(GARBAGE COLLECTION)
+=================================================
+
+Python automatically removes objects that are
+no longer used.
+
+The __del__() method is called before object
+destruction.
+
+Example:
+
+class Test:
+
+    def __del__(self):
+        print("Object Destroyed")
+
+obj = Test()
+
+del obj
+
+Output:
+
+Object Destroyed
+
+=================================================
+6. CLASS INHERITANCE
+=================================================
+
+Inheritance allows one class to acquire the
+properties and methods of another class.
+
+Syntax:
+
+class Child(Parent):
+    statements
+
+Example:
+
+class Animal:
+
+    def sound(self):
+        print("Animal Sound")
+
+class Dog(Animal):
+    pass
+
+d = Dog()
+
+d.sound()
+
+Output:
+
+Animal Sound
+
+-------------------------------------------------
+
+Example:
+
+class Vehicle:
+
+    def start(self):
+        print("Vehicle Started")
+
+class Car(Vehicle):
+    pass
+
+c = Car()
+
+c.start()
+
+Output:
+
+Vehicle Started
+
+=================================================
+7. OVERRIDING METHODS
+=================================================
+
+Method Overriding occurs when a child class
+provides its own implementation of a method.
+
+Example:
+
+class Animal:
+
+    def sound(self):
+        print("Animal Sound")
+
+class Dog(Animal):
+
+    def sound(self):
+        print("Dog Barks")
+
+d = Dog()
+
+d.sound()
+
+Output:
+
+Dog Barks
+
+=================================================
+8. OVERLOADING OPERATORS
+=================================================
+
+Operator Overloading changes the behavior of
+operators for user-defined objects.
+
+Example:
+
+class Number:
+
+    def __init__(self,x):
+        self.x = x
+
+    def __add__(self,other):
+        return self.x + other.x
+
+n1 = Number(10)
+n2 = Number(20)
+
+print(n1 + n2)
+
+Output:
+
+30
+
+-------------------------------------------------
+
+Example:
+
+class Demo:
+
+    def __str__(self):
+        return "Python"
+
+d = Demo()
+
+print(d)
+
+Output:
+
+Python
+
+=================================================
+9. DATA HIDING
+=================================================
+
+Data Hiding protects data from direct access.
+
+Private variables are created using double
+underscore (__).
+
+Example:
+
+class Student:
+
+    __marks = 90
+
+    def show(self):
+        print(self.__marks)
+
+s = Student()
+
+s.show()
+
+Output:
+
+90
+
+-------------------------------------------------
+
+Invalid Access:
+
+print(s.__marks)
+
+Output:
+
+AttributeError
+
+=================================================
+REAL-LIFE OOPS EXAMPLE
+=================================================
+
+class Employee:
+
+    def __init__(self,name,salary):
+        self.name = name
+        self.salary = salary
+
+    def display(self):
+        print(self.name,self.salary)
+
+e1 = Employee("Rahul",30000)
+
+e1.display()
+
+Output:
+
+Rahul 30000
+
+=================================================
+12. REGULAR EXPRESSIONS
+=================================================
+
+Regular Expressions (Regex) are patterns used
+for searching and matching text.
+
+Python provides the re module.
+
+=================================================
+IMPORTING REGEX MODULE
+=================================================
+
+import re
+
+=================================================
+1. MATCH FUNCTION
+=================================================
+
+Checks pattern at the beginning of a string.
+
+Example:
+
+import re
+
+result = re.match("Python",
+                  "Python Programming")
+
+print(result)
+
+Output:
+
+<Match Object>
+
+=================================================
+2. SEARCH FUNCTION
+=================================================
+
+Searches pattern anywhere in a string.
+
+Example:
+
+import re
+
+result = re.search("Programming",
+                   "Python Programming")
+
+print(result)
+
+Output:
+
+<Match Object>
+
+=================================================
+3. FINDALL FUNCTION
+=================================================
+
+Returns all matching occurrences.
+
+Example:
+
+import re
+
+text = "cat bat rat"
+
+result = re.findall("at",text)
+
+print(result)
+
+Output:
+
+['at', 'at', 'at']
+
+=================================================
+4. SUBSTITUTE FUNCTION (sub)
+=================================================
+
+Replaces matched text.
+
+Example:
+
+import re
+
+text = "Python is Easy"
+
+result = re.sub("Easy",
+                "Powerful",
+                text)
+
+print(result)
+
+Output:
+
+Python is Powerful
+
+=================================================
+COMMON REGEX SYMBOLS
+=================================================
+
+Symbol      Meaning
+
+.           Any Character
+^           Start of String
+$           End of String
+*           Zero or More
++           One or More
+?           Optional
+\d          Digit
+\D          Non-Digit
+\s          Space
+\S          Non-Space
+[a-z]       Lowercase Letters
+[A-Z]       Uppercase Letters
+
+=================================================
+REGEX EXAMPLE: MOBILE NUMBER
+=================================================
+
+import re
+
+mobile = "9876543210"
+
+if re.match("^[0-9]{10}$",mobile):
+    print("Valid Number")
+
+Output:
+
+Valid Number
+
+=================================================
+REGEX EXAMPLE: EMAIL VALIDATION
+=================================================
+
+import re
+
+email = "abc@gmail.com"
+
+pattern = r'^[a-zA-Z0-9._]+@[a-z]+\.com$'
+
+if re.match(pattern,email):
+    print("Valid Email")
+
+Output:
+
+Valid Email
+
+=================================================
+IMPORTANT DIFFERENCES
+=================================================
+
+Class
+-----
+Blueprint for objects.
+
+Object
+------
+Instance of class.
+
+Inheritance
+-----------
+Acquiring parent properties.
+
+Method Overriding
+-----------------
+Redefining parent method.
+
+Operator Overloading
+--------------------
+Changing operator behavior.
+
+Data Hiding
+-----------
+Restricting direct access to data.
+
+-------------------------------------------------
+
+match()
+-------
+Checks beginning of string.
+
+search()
+--------
+Checks entire string.
+
+findall()
+---------
+Returns all matches.
+
+sub()
+-----
+Replaces matched text.
+
+=================================================
+VIVA QUESTIONS
+=================================================
+
+1. What is OOPS?
+2. What is a class?
+3. What is an object?
+4. What are attributes?
+5. What is __init__() method?
+6. What are built-in class attributes?
+7. What is garbage collection?
+8. What is inheritance?
+9. What is method overriding?
+10. What is operator overloading?
+11. What is data hiding?
+12. What is a regular expression?
+13. What is the use of re module?
+14. Difference between match() and search()?
+15. What is findall()?
+16. What is sub() function?
+17. What is polymorphism?
+18. What is encapsulation?
+
+=================================================
+END OF SESSION 7
+=================================================
